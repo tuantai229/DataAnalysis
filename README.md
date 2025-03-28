@@ -2,7 +2,7 @@
 
 ## Giới thiệu
 
-Đây là portfolio phân tích dữ liệu toàn diện nhằm khám phá các xu hướng và thông tin chi tiết trong lĩnh vực Data Science, Machine Learning và AI. Dự án sử dụng các công cụ phân tích dữ liệu hiện đại trong Python để khám phá nhiều bộ dữ liệu khác nhau.
+Dự án phân tích dữ liệu toàn diện nhằm khám phá các xu hướng và thông tin chi tiết trong lĩnh vực Data Science, Machine Learning và AI. Dự án sử dụng các công cụ phân tích dữ liệu hiện đại trong Python để khám phá nhiều bộ dữ liệu khác nhau.
 
 ## Bộ dữ liệu hiện có
 
@@ -12,6 +12,14 @@ Phân tích chi tiết về xu hướng lương trong lĩnh vực Data Science, 
 - Phân tích theo chức danh công việc
 - Phân tích theo vị trí địa lý
 - Phân tích theo kinh nghiệm và quy mô công ty
+
+### 2. City Population Density
+
+Phân tích về dân số và mật độ dân số của các thành phố trên toàn cầu, bao gồm:
+- Xếp hạng thành phố theo dân số
+- Thống kê về phân bố thành phố theo quốc gia
+- Mối quan hệ giữa diện tích và dân số
+- Phân tích mật độ dân số theo quốc gia
 
 ## Cấu trúc dự án
 
@@ -25,6 +33,8 @@ DataAnalysis/
 ├── datasets/                     # Thư mục chứa tất cả bộ dữ liệu
 │   ├── ds_salaries/              # Dữ liệu phân tích lương Data Science
 │   │   └── ds_salaries.csv       # File dữ liệu gốc
+│   ├── city_populations/         # Dữ liệu phân tích dân số thành phố
+│   │   └── city_population_density.csv # File dữ liệu gốc
 │   └── ...                       # Các bộ dữ liệu khác (sẽ thêm sau)
 │
 └── notebooks/                    # Jupyter notebooks cho phân tích khám phá
@@ -32,6 +42,8 @@ DataAnalysis/
     │   ├── 01_ds_salaries_exploration.ipynb      # Khám phá dữ liệu
     │   ├── 02_salary_by_job_title.ipynb          # Phân tích theo chức danh
     │   └── 03_salary_by_geography.ipynb          # Phân tích theo quốc gia/vị trí
+    ├── city_populations/         # Phân tích dữ liệu dân số thành phố
+    │   └── city_population_analysis.ipynb        # Phân tích toàn diện về dân số và mật độ
     └── ...                       # Các phân tích cho bộ dữ liệu khác (sẽ thêm sau)
 ```
 
@@ -73,24 +85,58 @@ Bộ dữ liệu `ds_salaries.csv` chứa thông tin về mức lương của c�
 - Đánh giá tác động của quy mô công ty đến mức lương
 - Phân tích dòng chảy nhân lực giữa các khu vực địa lý
 
-## Phát hiện chính
+## Phân tích bộ dữ liệu city_population_density
+
+Bộ dữ liệu `city_population_density.csv` chứa thông tin về dân số, diện tích, và mật độ dân số của các thành phố lớn trên thế giới.
+
+### Các cột trong bộ dữ liệu:
+
+- `Rank`: Thứ hạng của thành phố theo mật độ dân số
+- `City`: Tên thành phố
+- `Population`: Dân số
+- `Area KM2`: Diện tích tính theo kilômét vuông
+- `Area M2`: Diện tích tính theo dặm vuông
+- `Density KM2`: Mật độ dân số tính theo người/kilômét vuông
+- `Density M2`: Mật độ dân số tính theo người/dặm vuông
+- `Country`: Quốc gia của thành phố
+- `Year`: Năm của dữ liệu
+
+### Các phân tích đã thực hiện:
+
+#### Phân tích toàn diện (`city_population_analysis.ipynb`)
+- Xếp hạng các thành phố theo dân số (lớn nhất và nhỏ nhất)
+- Phân tích phân bố thành phố theo quốc gia
+- Tìm ra các thành phố có cả dân số và diện tích lớn
+- Thống kê mật độ dân số theo quốc gia
+- Phân tích thành phố có dân số lớn nhất trong mỗi quốc gia
+
+### Phát hiện chính:
+
+1. **Phân bố dân số**:
+   - Một số thành phố như Tokyo và Delhi có dân số cực kỳ lớn, cho thấy sự tập trung dân số đáng kể.
+   - Có sự chênh lệch lớn về quy mô dân số giữa các thành phố lớn nhất và nhỏ nhất.
+
+2. **Theo quốc gia**:
+   - Các quốc gia như Ấn Độ và Trung Quốc có nhiều thành phố xuất hiện trong danh sách, phản ánh sự đô thị hóa mạnh mẽ.
+   - Mật độ dân số thay đổi đáng kể giữa các quốc gia, phản ánh sự khác biệt về mô hình đô thị hóa.
+
+3. **Mối quan hệ diện tích-dân số**:
+   - Không phải thành phố có diện tích lớn nhất sẽ có dân số lớn nhất, cho thấy mật độ dân số không đồng đều.
+   - Một số thành phố cân bằng giữa diện tích lớn và dân số đông, trong khi các thành phố khác có diện tích nhỏ nhưng dân số đông đúc.
+
+## Phát hiện chung từ cả hai bộ dữ liệu
 
 Một số phát hiện quan trọng từ phân tích dữ liệu bao gồm:
 
-1. **Theo chức danh công việc**:
+1. **Từ phân tích ds_salaries**:
    - Các vị trí liên quan đến AI, ML và Data Science có xu hướng được trả lương cao hơn.
-   - Các vị trí quản lý (như Director, VP) thường có mức lương cao nhất.
-   - Một số chức danh có sự chênh lệch lớn về mức lương giữa các mức kinh nghiệm.
-
-2. **Theo địa lý**:
+   - Các vị trí quản lý thường có mức lương cao nhất.
    - Bắc Mỹ, đặc biệt là Hoa Kỳ, có mức lương trung bình cao nhất cho các vị trí Data Science.
-   - Có sự khác biệt đáng kể về mức lương giữa các khu vực địa lý.
-   - Quy mô công ty tỷ lệ thuận với mức lương ở hầu hết các quốc gia.
 
-3. **Theo kinh nghiệm và quy mô công ty**:
-   - Mức lương tăng theo cấp bậc kinh nghiệm trong hầu hết các trường hợp.
-   - Các công ty lớn thường trả lương cao hơn cho cùng một vị trí và mức kinh nghiệm.
-   - Tỷ lệ làm việc từ xa có ảnh hưởng đến mức lương ở một số quốc gia.
+2. **Từ phân tích city_population_density**:
+   - Phân bố dân số thể hiện sự chênh lệch lớn giữa các thành phố.
+   - Các quốc gia có dân số lớn như Ấn Độ và Trung Quốc có nhiều thành phố trong danh sách.
+   - Mật độ dân số thay đổi đáng kể giữa các quốc gia, phản ánh sự khác biệt về mô hình đô thị hóa.
 
 ## Công nghệ sử dụng
 
@@ -105,7 +151,7 @@ Một số phát hiện quan trọng từ phân tích dữ liệu bao gồm:
 
 1. Clone repository:
 ```
-git clone https://github.com/username/data-science-portfolio.git
+git clone https://github.com/tuantai229/DataAnalysis.git
 cd data-science-portfolio
 ```
 

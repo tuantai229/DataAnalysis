@@ -64,16 +64,11 @@ ehthumbs.db
 Desktop.ini
 
 # Large data files
-*.csv
-*.xlsx
-*.xls
 *.zip
 *.gz
 *.tar
 *.rar
 *.7z
-# Uncomment the line below if you want to include specific CSV files
-!datasets/ds_salaries/ds_salaries.csv
 
 # Logs
 logs/
